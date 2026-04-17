@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .container {
+        text-align: center;
+        color: #eac55e;
+        animation: fadeIn 1.5s ease-out;
+        margin-top: 80px;
+    }
+
+    h1 {
+        font-size: 38px;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 18px;
+        color: #e6e6e6;
+        margin-bottom: 25px;
+    }
+
+    .btn {
+        background: #eac55e;
+        color: #0b1a3c;
+        padding: 14px 28px;
+        font-size: 18px;
+        border-radius: 12px;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-block;
+        transition: 0.3s ease;
+        border: none;
+    }
+
+    .btn:hover {
+        background: #ffdd78;
+        box-shadow: 0 0 12px rgba(234, 197, 94, 0.8);
+    }
+
+    .logout {
+        margin-top: 20px;
+        font-size: 14px;
+    }
+
+    .logout a {
+        color: #ff6b6b;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(25px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<div class="container">
+    <h1>Welcome to Mysuru Heritage</h1>
+    <p>Discover timeless palaces, temples, gardens, and culture.</p>
+
+    <a href="/places/" class="btn">Explore Places</a>
+
+    <div class="logout">
+        <p><a href="{% url 'logout' %}">Logout</a></p>
+    </div>
+</div>
+
+{% endblock %}

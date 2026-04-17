@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    h1 {
+        margin-top: 30px;
+        font-size: 36px;
+        color: #eac55e;
+        letter-spacing: 2px;
+        text-align: center;
+    }
+
+    .info-box {
+        width: 70%;
+        margin: 30px auto;
+        background: rgba(255,255,255,0.08);
+        border-radius: 15px;
+        border: 1px solid #eac55e;
+        padding: 25px;
+        backdrop-filter: blur(6px);
+        text-align: left;
+        animation: fadeIn 1s ease-out;
+    }
+
+    .info-box h2 {
+        color: #ffdd78;
+        margin-bottom: 10px;
+    }
+
+    .label {
+        color: #eac55e;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    p {
+        color: #dcdcdc;
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+
+    .back {
+        margin-top: 25px;
+        text-align: center;
+    }
+
+    .back a {
+        color: #eac55e;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(30px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+</style>
+
+<h1>{{ place }}</h1>
+
+<div class="info-box">
+
+    <h2>📘 History</h2>
+    <p>{{ details.history }}</p>
+
+    <h2>⏰ Timings</h2>
+    <p>{{ details.timings }}</p>
+
+    <h2>💰 Entry Fee</h2>
+    <p>{{ details.fee }}</p>
+
+    <h2>🌤 Best Time to Visit</h2>
+    <p>{{ details.best_time }}</p>
+
+    <h2>✨ Fun Fact</h2>
+    <p>{{ details.facts }}</p>
+
+</div>
+
+<div class="back">
+    <a href="/places/options/?place={{ place }}">⬅ Back</a>
+</div>
+
+<h3>Add Review</h3>
+
+<form method="POST" action="{% url 'add_review' place.id %}">
+    {% csrf_token %}
+
+    <input type="number" name="rating" min="1" max="5" placeholder="Rating (1-5)" required>
+
+    <textarea name="comment" placeholder="Write your review..." required></textarea>
+
+    <button type="submit">Submit</button>
+</form>
+
+<h3>Reviews</h3>
+
+{% for review in place.review_set.all %}
+    <div style="background:#1a2a5a;padding:10px;margin:10px 0;border-radius:8px;">
+        <p><b>{{ review.user.username }}</b> - ⭐ {{ review.rating }}</p>
+        <p>{{ review.comment }}</p>
+    </div>
+{% empty %}
+    <p>No reviews yet</p>
+{% endfor %}
+
+{% endblock %}

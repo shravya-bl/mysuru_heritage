@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    h1 {
+        text-align: center;
+        color: #eac55e;
+        margin-top: 20px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        padding: 30px;
+    }
+
+    .card {
+        background: rgba(255,255,255,0.08);
+        border: 1px solid #eac55e;
+        border-radius: 15px;
+        padding: 12px;
+        text-align: center;
+        box-shadow: 0 0 12px rgba(234,197,94,0.4);
+    }
+
+    img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+
+    h3 {
+        color: #ffd86b;
+        margin-top: 10px;
+    }
+
+    p {
+        color: #ddd;
+        font-size: 14px;
+    }
+
+    .upload-btn {
+        text-align: center;
+        margin: 20px;
+    }
+
+    .upload-btn a {
+        background: #eac55e;
+        color: #0b1a3c;
+        padding: 10px 20px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+</style>
+
+<h1>Mysuru Photo Gallery</h1>
+
+<div class="upload-btn">
+    <a href="/gallery/upload/">Upload Photo</a>
+</div>
+
+<div class="grid">
+    {% for photo in photos %}
+    <div class="card">
+        <a href="{{ photo.image.url }}" target="_blank">
+        <img src="{{ photo.image.url }}">
+        </a>
+        <h3>{{ photo.caption }}</h3>
+        <p>{{ photo.place }}</p>
+    </div>
+    {% empty %}
+    <h2 style="text-align:center;">No photos uploaded yet</h2>
+    {% endfor %}
+</div>
+
+{% endblock %}

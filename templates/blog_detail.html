@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #0b1a3c, #12306b, #0d1f47);
+        color: white;
+        font-family: "Poppins", sans-serif;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 100px auto 40px;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid #eac55e;
+        border-radius: 20px;
+        padding: 25px;
+        backdrop-filter: blur(6px);
+        animation: fadeIn 1s ease;
+    }
+
+    img {
+        width: 100%;
+        border-radius: 12px;
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        color: #eac55e;
+        font-size: 34px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    p {
+        line-height: 1.7;
+        font-size: 18px;
+        color: #e6e6e6;
+        margin-bottom: 20px;
+    }
+
+    .back-btn {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .back-btn a {
+        color: #eac55e;
+        font-weight: bold;
+        font-size: 18px;
+        text-decoration: none;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<div class="container">
+    <h1>{{ post.title }}</h1>
+
+    <img src="{{ post.image }}" alt="Blog Image">
+
+    <p>{{ post.content }}</p>
+
+    <div class="back-btn">
+        <a href="/blog/">⬅ Back to Blog</a>
+    </div>
+</div>
+
+{% endblock %}
