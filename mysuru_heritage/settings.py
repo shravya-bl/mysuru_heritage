@@ -8,10 +8,10 @@ SECRET_KEY = 'django-insecure-1234567890'
 DEBUG = True
 
 # ✅ FIXED
-ALLOWED_HOSTS = ['rbh111.pythonanywhere.com']
+ALLOWED_HOSTS = ['*']
 
 # ✅ CSRF FIX
-CSRF_TRUSTED_ORIGINS = ['https://rbh111.pythonanywhere.com']
+CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com']
 
 
 # Application definition
