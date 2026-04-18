@@ -27,12 +27,6 @@
         margin-bottom: 10px;
     }
 
-    .label {
-        color: #eac55e;
-        font-weight: bold;
-        margin-top: 10px;
-    }
-
     p {
         color: #dcdcdc;
         font-size: 16px;
@@ -57,31 +51,32 @@
     }
 </style>
 
-<h1>{{ place }}</h1>
+<h1>{{ place_name }}</h1>
 
 <div class="info-box">
 
-    <h2>📘 History</h2>
+    <h2>History</h2>
     <p>{{ details.history }}</p>
 
-    <h2>⏰ Timings</h2>
+    <h2>Timings</h2>
     <p>{{ details.timings }}</p>
 
-    <h2>💰 Entry Fee</h2>
+    <h2>Entry Fee</h2>
     <p>{{ details.fee }}</p>
 
-    <h2>🌤 Best Time to Visit</h2>
+    <h2>Best Time to Visit</h2>
     <p>{{ details.best_time }}</p>
 
-    <h2>✨ Fun Fact</h2>
+    <h2>Fun Fact</h2>
     <p>{{ details.facts }}</p>
 
 </div>
 
 <div class="back">
-    <a href="/places/options/?place={{ place }}">⬅ Back</a>
+    <a href="/places/options/?place={{ place_name }}">Back</a>
 </div>
 
+{% if place %}
 <h3>Add Review</h3>
 
 <form method="POST" action="{% url 'add_review' place.id %}">
@@ -96,13 +91,16 @@
 
 <h3>Reviews</h3>
 
-{% for review in place.review_set.all %}
+{% for review in reviews %}
     <div style="background:#1a2a5a;padding:10px;margin:10px 0;border-radius:8px;">
-        <p><b>{{ review.user.username }}</b> - ⭐ {{ review.rating }}</p>
+        <p><b>{{ review.user.username }}</b> - {{ review.rating }}/5</p>
         <p>{{ review.comment }}</p>
     </div>
 {% empty %}
     <p>No reviews yet</p>
 {% endfor %}
+{% else %}
+<p style="text-align:center;margin-top:20px;">This place is not in the database yet, so reviews are disabled.</p>
+{% endif %}
 
 {% endblock %}

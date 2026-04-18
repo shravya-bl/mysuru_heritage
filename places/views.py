@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import Place, Review
 
@@ -62,15 +63,16 @@ def route_page(request):
 
 # -------------------- PLACE INFO PAGE --------------------
 def place_info(request):
-    place_name = request.GET.get('place')
+    place_name = request.GET.get('place', '')
 
-    place = Place.objects.get(name=place_name)   # ✅ FIXED
+    # Prevent crashes when place name is not present in DB
+    place = Place.objects.filter(name=place_name).first()
 
     info_data = {
         "Mysore Palace": {
             "history": "The Mysore Palace is the official residence of the Wadiyar dynasty.",
             "timings": "10:00 AM - 5:30 PM",
-            "fee": "₹70 (Adults), ₹30 (Children)",
+            "fee": "Rs 70 (Adults), Rs 30 (Children)",
             "best_time": "Evening illumination",
             "facts": "Lights up with 97,000 bulbs!",
         },
@@ -83,21 +85,34 @@ def place_info(request):
         },
     }
 
-    details = info_data.get(place_name, {})
+    details = info_data.get(place_name, {
+        "history": "Information will be updated soon.",
+        "timings": "Not available",
+        "fee": "Not available",
+        "best_time": "Not available",
+        "facts": "Stay tuned for more details.",
+    })
+
+    reviews = place.review_set.all().order_by('-created_at') if place else []
 
     return render(request, "place_info.html", {
-        "place": place,   # ✅ IMPORTANT FIX
+        "place": place,
+        "place_name": place_name,
         "details": details,
+        "reviews": reviews,
     })
 
 
 # -------------------- ADD REVIEW --------------------
+@login_required
 def add_review(request, place_id):
+    place = Place.objects.filter(id=place_id).first()
+    if not place:
+        return redirect('/places/')
+
     if request.method == 'POST':
         rating = request.POST.get('rating')
         comment = request.POST.get('comment')
-
-        place = Place.objects.get(id=place_id)
 
         Review.objects.create(
             user=request.user,
