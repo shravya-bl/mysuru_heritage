@@ -2,12 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Places Between • {{ place }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Places Between | {{ place }}</title>
 
     <style>
+        * { box-sizing: border-box; }
+
         body {
             margin: 0;
-            padding: 0;
+            padding: 16px;
             font-family: "Poppins", sans-serif;
             background: linear-gradient(135deg, #0b1a3c, #12306b, #0d1f47);
             color: white;
@@ -15,17 +18,17 @@
         }
 
         h1 {
-            margin-top: 30px;
-            font-size: 34px;
+            margin-top: 16px;
+            font-size: clamp(28px, 6.6vw, 34px);
             color: #eac55e;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
-            padding: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            padding: 20px 0;
         }
 
         .card {
@@ -38,13 +41,13 @@
         }
 
         .card:hover {
-            transform: scale(1.05);
+            transform: translateY(-3px);
             box-shadow: 0 0 15px rgba(234,197,94,0.8);
         }
 
         .card img {
             width: 100%;
-            height: 170px;
+            height: clamp(140px, 32vw, 170px);
             border-radius: 12px;
             object-fit: cover;
         }
@@ -61,13 +64,13 @@
         }
 
         .back {
-            margin-bottom: 30px;
+            margin-bottom: 18px;
         }
 
         .back a {
             color: #eac55e;
             text-decoration: none;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: bold;
         }
     </style>
@@ -75,7 +78,7 @@
 
 <body>
 
-    <h1>Places Between → {{ place }}</h1>
+    <h1>Places Between | {{ place }}</h1>
 
     <div class="grid">
         {% for p in places_list %}
@@ -90,9 +93,8 @@
     </div>
 
     <div class="back">
-        <a href="/places/options/?place={{ place }}">⬅ Back</a>
+        <a href="/places/options/?place={{ place }}">Back</a>
     </div>
 
 </body>
 </html>
-

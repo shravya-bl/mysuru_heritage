@@ -3,24 +3,23 @@
 
 <style>
     h1 {
-        margin-top: 40px;
-        font-size: 34px;
+        margin-top: 25px;
+        font-size: clamp(28px, 6.5vw, 34px);
         color: #eac55e;
-        letter-spacing: 2px;
+        letter-spacing: 1.2px;
         text-align: center;
     }
 
     .options-box {
-        margin-top: 50px;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 25px;
-        padding: 20px;
+        margin-top: 28px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 18px;
+        padding: 12px;
     }
 
     .option {
-        width: 260px;
+        width: 100%;
         padding: 20px;
         background: rgba(255, 255, 255, 0.08);
         border-radius: 15px;
@@ -31,28 +30,30 @@
     }
 
     .option:hover {
-        transform: scale(1.05);
+        transform: translateY(-3px);
         box-shadow: 0 0 15px rgba(234, 197, 94, 0.8);
     }
 
     .option h2 {
         color: #ffdd78;
         margin-bottom: 10px;
+        font-size: clamp(20px, 4.6vw, 24px);
     }
 
     .option p {
         color: #d6d6d6;
         font-size: 14px;
+        margin: 0;
     }
 
     .back {
-        margin-top: 40px;
+        margin-top: 26px;
         text-align: center;
     }
 
     .back a {
         color: #eac55e;
-        font-size: 18px;
+        font-size: 17px;
         text-decoration: none;
         font-weight: bold;
     }
@@ -63,24 +64,24 @@
 <div class="options-box">
 
     <div class="option" onclick="window.location.href='/places/route/?place={{ place }}'">
-        <h2>📍 Route</h2>
+        <h2>Route</h2>
         <p>See directions from your location to {{ place }}</p>
     </div>
 
     <div class="option" onclick="window.location.href='/places/info/?place={{ place }}'">
-        <h2>📘 Information</h2>
+        <h2>Information</h2>
         <p>Learn the history, timings, and details of this place</p>
     </div>
 
     <div class="option" onclick="window.location.href='/places/between/?place={{ place }}'">
-        <h2>🛣️ Places Between</h2>
+        <h2>Places Between</h2>
         <p>See tourist spots on the way to {{ place }}</p>
     </div>
 
 </div>
 
 <div class="back">
-    <a href="/places/">⬅ Back to Places</a>
+    <a href="/places/">Back to Places</a>
 </div>
 
 {% endblock %}

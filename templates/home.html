@@ -7,17 +7,18 @@
         text-align: center;
         color: #eac55e;
         animation: fadeIn 1.5s ease-out;
-        margin-top: 80px;
+        margin-top: clamp(20px, 8vw, 80px);
+        padding: 0 10px;
     }
 
     h1 {
-        font-size: 38px;
-        letter-spacing: 2px;
+        font-size: clamp(30px, 7vw, 38px);
+        letter-spacing: 1.2px;
         margin-bottom: 10px;
     }
 
     p {
-        font-size: 18px;
+        font-size: clamp(16px, 3.8vw, 18px);
         color: #e6e6e6;
         margin-bottom: 25px;
     }
@@ -25,8 +26,8 @@
     .btn {
         background: #eac55e;
         color: #0b1a3c;
-        padding: 14px 28px;
-        font-size: 18px;
+        padding: 12px 24px;
+        font-size: clamp(16px, 4vw, 18px);
         border-radius: 12px;
         font-weight: bold;
         text-decoration: none;

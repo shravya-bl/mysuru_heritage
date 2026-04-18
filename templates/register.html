@@ -3,22 +3,22 @@
 
 <style>
     .card {
-        width: 380px;
+        width: min(100%, 430px);
         background: rgba(255, 255, 255, 0.07);
         backdrop-filter: blur(8px);
         border-radius: 18px;
         border: 1px solid #eac55e;
-        padding: 30px;
+        padding: clamp(20px, 4vw, 30px);
         text-align: center;
         box-shadow: 0 0 20px rgba(234, 197, 94, 0.3);
         animation: fadeIn 1.2s ease-out;
-        margin: 60px auto;
+        margin: clamp(20px, 5vw, 60px) auto;
     }
 
     h2 {
         color: #eac55e;
-        font-size: 28px;
-        margin-bottom: 25px;
+        font-size: clamp(24px, 4.5vw, 28px);
+        margin-bottom: 20px;
         font-weight: 600;
         letter-spacing: 1px;
         text-align: center;

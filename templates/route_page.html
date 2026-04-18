@@ -3,25 +3,30 @@
 
 <style>
     h1 {
-        margin-top: 35px;
-        font-size: 34px;
+        margin-top: 20px;
+        font-size: clamp(28px, 6.5vw, 34px);
         color: #eac55e;
-        letter-spacing: 2px;
+        letter-spacing: 1.2px;
+        text-align: center;
+    }
+
+    .form-wrap {
+        margin-top: 26px;
         text-align: center;
     }
 
     .form-box {
-        margin-top: 30px;
+        width: min(100%, 460px);
+        margin: 0 auto;
         background: rgba(255,255,255,0.10);
         border: 1px solid #eac55e;
-        padding: 25px;
+        padding: clamp(18px, 4vw, 25px);
         border-radius: 15px;
-        display: inline-block;
         backdrop-filter: blur(6px);
     }
 
     input {
-        width: 260px;
+        width: 100%;
         padding: 12px;
         font-size: 15px;
         margin-bottom: 12px;
@@ -37,7 +42,7 @@
     }
 
     button {
-        width: 260px;
+        width: 100%;
         padding: 12px;
         background: #eac55e;
         color: #0b1a3c;
@@ -60,13 +65,16 @@
     }
 
     .map-button a {
+        display: inline-block;
+        max-width: 100%;
         background: #eac55e;
-        padding: 12px 25px;
+        padding: 12px 20px;
         border-radius: 12px;
         font-weight: bold;
         color: #0b1a3c;
         text-decoration: none;
         transition: 0.3s;
+        word-break: break-word;
     }
 
     .map-button a:hover {
@@ -81,7 +89,7 @@
 
     .back a {
         color: #eac55e;
-        font-size: 18px;
+        font-size: 17px;
         text-decoration: none;
         font-weight: bold;
     }
@@ -89,7 +97,7 @@
 
 <h1>Route to {{ place }}</h1>
 
-<div style="text-align:center;">
+<div class="form-wrap">
     <div class="form-box">
         <form method="POST">
             {% csrf_token %}
@@ -106,7 +114,7 @@
 {% endif %}
 
 <div class="back">
-    <a href="/places/options/?place={{ place }}">⬅ Back</a>
+    <a href="/places/options/?place={{ place }}">Back</a>
 </div>
 
 {% endblock %}

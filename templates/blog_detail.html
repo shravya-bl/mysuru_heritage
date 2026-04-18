@@ -2,19 +2,13 @@
 {% block content %}
 
 <style>
-    body {
-        background: linear-gradient(135deg, #0b1a3c, #12306b, #0d1f47);
-        color: white;
-        font-family: "Poppins", sans-serif;
-    }
-
     .container {
-        max-width: 900px;
-        margin: 100px auto 40px;
+        width: min(100%, 960px);
+        margin: 26px auto;
         background: rgba(255,255,255,0.08);
         border: 1px solid #eac55e;
         border-radius: 20px;
-        padding: 25px;
+        padding: clamp(16px, 4vw, 25px);
         backdrop-filter: blur(6px);
         animation: fadeIn 1s ease;
     }
@@ -23,20 +17,23 @@
         width: 100%;
         border-radius: 12px;
         margin-bottom: 20px;
+        max-height: 480px;
+        object-fit: cover;
     }
 
     h1 {
         color: #eac55e;
-        font-size: 34px;
+        font-size: clamp(28px, 7vw, 34px);
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 18px;
     }
 
     p {
         line-height: 1.7;
-        font-size: 18px;
+        font-size: clamp(16px, 4vw, 18px);
         color: #e6e6e6;
         margin-bottom: 20px;
+        white-space: pre-wrap;
     }
 
     .back-btn {
@@ -47,7 +44,7 @@
     .back-btn a {
         color: #eac55e;
         font-weight: bold;
-        font-size: 18px;
+        font-size: 17px;
         text-decoration: none;
     }
 
@@ -60,12 +57,14 @@
 <div class="container">
     <h1>{{ post.title }}</h1>
 
+    {% if post.image %}
     <img src="{{ post.image }}" alt="Blog Image">
+    {% endif %}
 
     <p>{{ post.content }}</p>
 
     <div class="back-btn">
-        <a href="/blog/">⬅ Back to Blog</a>
+        <a href="/blog/">Back to Blog</a>
     </div>
 </div>
 

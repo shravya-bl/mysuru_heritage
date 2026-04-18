@@ -3,20 +3,21 @@
 
 <style>
     h1 {
-        margin-top: 30px;
-        font-size: 36px;
+        margin-top: 18px;
+        font-size: clamp(28px, 6.5vw, 36px);
         color: #eac55e;
-        letter-spacing: 2px;
+        letter-spacing: 1.2px;
         text-align: center;
+        word-break: break-word;
     }
 
     .info-box {
-        width: 70%;
-        margin: 30px auto;
+        width: min(100%, 900px);
+        margin: 24px auto;
         background: rgba(255,255,255,0.08);
         border-radius: 15px;
         border: 1px solid #eac55e;
-        padding: 25px;
+        padding: clamp(18px, 4vw, 25px);
         backdrop-filter: blur(6px);
         text-align: left;
         animation: fadeIn 1s ease-out;
@@ -24,30 +25,89 @@
 
     .info-box h2 {
         color: #ffdd78;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
+        font-size: clamp(20px, 5vw, 24px);
     }
 
     p {
         color: #dcdcdc;
-        font-size: 16px;
-        margin-bottom: 8px;
+        font-size: clamp(15px, 3.8vw, 16px);
+        margin-bottom: 12px;
+        line-height: 1.55;
     }
 
     .back {
-        margin-top: 25px;
+        margin-top: 20px;
         text-align: center;
     }
 
     .back a {
         color: #eac55e;
         text-decoration: none;
-        font-size: 18px;
+        font-size: 17px;
         font-weight: bold;
     }
 
+    .review-form {
+        width: min(100%, 900px);
+        margin: 24px auto 0;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid #eac55e;
+        border-radius: 14px;
+        padding: 18px;
+    }
+
+    .review-form h3,
+    .reviews-wrap h3 {
+        color: #ffdd78;
+        margin-top: 0;
+        margin-bottom: 12px;
+    }
+
+    .review-form input,
+    .review-form textarea {
+        width: 100%;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 12px;
+        margin-bottom: 10px;
+        background: rgba(255,255,255,0.18);
+        color: white;
+        font-size: 15px;
+    }
+
+    .review-form textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    .review-form button {
+        width: 100%;
+        border: none;
+        border-radius: 10px;
+        padding: 11px;
+        background: #eac55e;
+        color: #0b1a3c;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .reviews-wrap {
+        width: min(100%, 900px);
+        margin: 18px auto 0;
+    }
+
+    .review-item {
+        background: #1a2a5a;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 8px;
+    }
+
     @keyframes fadeIn {
-        from {opacity: 0; transform: translateY(30px);}
-        to {opacity: 1; transform: translateY(0);}
+        from {opacity: 0; transform: translateY(30px);} 
+        to {opacity: 1; transform: translateY(0);} 
     }
 </style>
 
@@ -77,28 +137,32 @@
 </div>
 
 {% if place %}
-<h3>Add Review</h3>
+<div class="review-form">
+    <h3>Add Review</h3>
 
-<form method="POST" action="{% url 'add_review' place.id %}">
-    {% csrf_token %}
+    <form method="POST" action="{% url 'add_review' place.id %}">
+        {% csrf_token %}
 
-    <input type="number" name="rating" min="1" max="5" placeholder="Rating (1-5)" required>
+        <input type="number" name="rating" min="1" max="5" placeholder="Rating (1-5)" required>
 
-    <textarea name="comment" placeholder="Write your review..." required></textarea>
+        <textarea name="comment" placeholder="Write your review..." required></textarea>
 
-    <button type="submit">Submit</button>
-</form>
+        <button type="submit">Submit</button>
+    </form>
+</div>
 
-<h3>Reviews</h3>
+<div class="reviews-wrap">
+    <h3>Reviews</h3>
 
-{% for review in reviews %}
-    <div style="background:#1a2a5a;padding:10px;margin:10px 0;border-radius:8px;">
-        <p><b>{{ review.user.username }}</b> - {{ review.rating }}/5</p>
-        <p>{{ review.comment }}</p>
-    </div>
-{% empty %}
-    <p>No reviews yet</p>
-{% endfor %}
+    {% for review in reviews %}
+        <div class="review-item">
+            <p><b>{{ review.user.username }}</b> - {{ review.rating }}/5</p>
+            <p>{{ review.comment }}</p>
+        </div>
+    {% empty %}
+        <p>No reviews yet</p>
+    {% endfor %}
+</div>
 {% else %}
 <p style="text-align:center;margin-top:20px;">This place is not in the database yet, so reviews are disabled.</p>
 {% endif %}
